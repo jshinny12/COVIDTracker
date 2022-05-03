@@ -113,7 +113,7 @@ function getState(zip) {
   } else if (integZip >= 82000 && integZip <= 83199) {
       return 'wyoming';
   } else {
-      onsole.log('zip not in the U.S');
+      console.log('zip not in the U.S');
       return 'invalid';
   }
 }
