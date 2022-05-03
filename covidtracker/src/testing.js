@@ -55,7 +55,7 @@ stateSet.add("wisconsin");
 stateSet.add("wyoming");
 
 function getState(zip) {
-    const integZip = parseInt(zip, 10);
+    let integZip = parseInt(zip, 10);
 
     /* Ensure we have exactly 5 characters to parse */
     if (zip.length !== 5) {
@@ -177,154 +177,104 @@ async function getStateCode(state) {
     switch (state) {
         case "alabama":
             return "al";
-            break;
         case "alaska":
             return "ak";
-            break;
         case "arizona":
             return "az";
-            break;
         case "arkansas":
             return "ar";
-            break;
         case "california":
             return "ca";
-            break;
         case "colorado":
             return "co";
-            break;
         case "connecticut":
             return "ct";
-            break;
         case "delaware":
             return "ak";
-            break;
         case "florida":
             return "fl";
-            break;
         case "georgia":
             return "ga";
-            break;
         case "hawaii":
             return "hi";
-            break;
         case "idaho":
             return "id";
-            break;
         case "illinois":
             return "is";
-            break;
         case "indiana":
             return "in";
-            break;
         case "iowa":
             return "ia";
-            break;
         case "kansas":
             return "ks";
-            break;
         case "kentucky":
             return "ky";
-            break;
         case "louisiana":
             return "la";
-            break;
         case "maine":
             return "me";
-            break;
         case "maryland":
             return "md";
-            break;
         case "massachusetts":
             return "ma";
-            break;
         case "michigan":
             return "mi";
-            break;
         case "minnesota":
             return "mn";
-            break;
         case "mississippi":
             return "ms";
-            break;
         case "missouri":
             return "mo";
-            break;
         case "montana":
             return "mt";
-            break;
         case "nebraska":
             return "ne";
-            break;
         case "nevada":
             return "nv";
-            break;
         case "new hampshire":
             return "nh";
-            break;
         case "new jersey":
             return "nj";
-            break;
         case "new mexico":
             return "nm";
-            break;
         case "new york":
             return "ny";
-            break;
         case "north carolina":
             return "nc";
-            break;
         case "north dakota":
             return "nd";
-            break;
         case "ohio":
             return "oh";
-            break;
         case "oklahoma":
             return "ok";
-            break;
         case "oregon":
             return "or";
-            break;
         case "pennsylvania":
             return "pa";
-            break;
         case "rhode island":
             return "ir";
-            break;
         case "south carolina":
             return "sc";
-            break;
         case "south dakota":
             return "sd";
-            break;
         case "tennessee":
             return "tn";
-            break;
         case "texas":
             return "tx";
-            break;
         case "utah":
             return "ut";
-            break;
         case "vermont":
             return "vt";
-            break;
         case "virginia":
             return "va";
-            break;
         case "washington":
             return "wa";
-            break;
         case "west virginia":
             return "wv";
-            break;
         case "wisconsin":
             return "wi";
-            break;
         case "wyoming":
             return "wy";
-            break;
         default:
             console.log("can't retrieve state code");
             break;
