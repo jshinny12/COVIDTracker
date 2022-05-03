@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Menu } from 'antd';
 import { IdcardFilled, AreaChartOutlined, InfoCircleOutlined, HomeFilled } from '@ant-design/icons';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function NavBar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const items = [
     {
       label: 'Home',
-      key: 'home',
+      key: '',
       icon: <HomeFilled />,
     },
     {
@@ -30,10 +31,13 @@ function NavBar() {
     },
   ];
 
-  const [current, setCurrent] = React.useState('home');
+  useEffect(() => {
+    setCurrent(location.pathname.slice(1));
+  }, [location])
+
+  const [current, setCurrent] = React.useState(location.pathname.slice(1));
 
   const onClick = e => {
-    
     if (e.key === "home") {
       navigate("/");
     } else {

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Select } from 'antd';
+import { Select, Row, Col, Space } from 'antd';
 
 const { Option } = Select;
 
@@ -59,30 +59,49 @@ stateArray.push("wyoming");
 
 function Testing() {
 
+  const [query, setQuery] = useState("");
+
   function renderStateOptions() {
     let uiItems = [];
     stateArray.forEach((element) => {
       uiItems.push(
-        <Option value={element}>
-          {element}
+        <Option value={element} key={element}>
+          {element.charAt(0).toUpperCase() + element.slice(1)}
         </Option>
       );
     });
+    return uiItems;
   }
   
   return (
-    <div>
-      <Select
-        showSearch
-        placeholder="Select a state"
-        optionFilterProp="children"
-        filterOption={(input, option) => 
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
+    <Row style={{ width: "100%", height: "100%" }}>
+      <Col
+        span={24}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        {renderStateOptions()}
-      </Select>
-    </div>
+        <div>
+          <Space direction="vertical">
+            <Select
+              showSearch
+              placeholder="Select a state"
+              optionFilterProp="children"
+              filterOption={(input, option) => 
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              value={query}
+              onChange={(value) => setQuery(value)}
+              style={{ width: 150, marginTop: 100 }}
+            >
+              {renderStateOptions()}
+            </Select>
+          </Space>
+        </div>
+      </Col>
+    </Row>
   );
 }
 
