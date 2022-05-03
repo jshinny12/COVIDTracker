@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Select, Row, Col, Space } from 'antd';
+import { getData } from "../testing";
 
 const { Option } = Select;
 
@@ -72,6 +73,11 @@ function Testing() {
     });
     return uiItems;
   }
+
+  function handleSearch() {
+    console.log(query.toLowerCase());
+    console.log(getData(query.toLowerCase()));
+  }
   
   return (
     <Row style={{ width: "100%", height: "100%" }}>
@@ -95,6 +101,8 @@ function Testing() {
               value={query}
               onChange={(value) => setQuery(value)}
               style={{ width: 150, marginTop: 100 }}
+              onSearch={() => handleSearch()}
+              allowClear
             >
               {renderStateOptions()}
             </Select>

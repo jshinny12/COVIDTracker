@@ -106,7 +106,7 @@ function getState(zip) {
         return 'maine';
     } else if (integZip >= 20600 && integZip <= 21999) {
         return 'maryland';
-    } else if ((integZip >= 1000 && integZip <= 2799) || (integZip == 5501) || (integZip == 5544)) {
+    } else if ((integZip >= 1000 && integZip <= 2799) || (integZip === 5501) || (integZip === 5544)) {
         return 'massachusetts';
     } else if (integZip >= 48000 && integZip <= 49999) {
         return 'michigan';
@@ -132,7 +132,7 @@ function getState(zip) {
         return 'new-jersey';
     } else if (integZip >= 87000 && integZip <= 88499) {
         return 'new-mexico';
-    } else if ((integZip >= 10000 && integZip <= 14999) || (integZip == 6390) || (integZip == 501) || (integZip == 544)) {
+    } else if ((integZip >= 10000 && integZip <= 14999) || (integZip === 6390) || (integZip === 501) || (integZip === 544)) {
         return 'new-york';
     } else if (integZip >= 43000 && integZip <= 45999) {
         return 'ohio';
@@ -156,7 +156,7 @@ function getState(zip) {
         return 'utah';
     } else if (integZip >= 5000 && integZip <= 5999) {
         return 'vermont';
-    } else if ((integZip >= 20100 && integZip <= 20199) || (integZip >= 22000 && integZip <= 24699) || (integZip == 20598)) {
+    } else if ((integZip >= 20100 && integZip <= 20199) || (integZip >= 22000 && integZip <= 24699) || (integZip = 20598)) {
         return 'virginia';
     } else if (integZip >= 98000 && integZip <= 99499) {
         return 'washington';
@@ -363,7 +363,7 @@ async function getSites(zip) {
     data.forEach(test => {
 
         test.physical_address.forEach(addy => {
-            if (addy.postal_code.substring(0, 5) == zip) {
+            if (addy.postal_code.substring(0, 5) === zip) {
                 addy.id = test.name;
                 addy.location_id = test.description;
                 arr[i] = addy;
@@ -408,7 +408,7 @@ function getSiteDescription(site) {
 
 // (async () => {
 //     var array = await getSites('19104');
-//     if (array.length == 0) {
+//     if (array.length===0) {
 //         console.log('no testing sites in this zip');
 
 //     } else {
@@ -416,4 +416,4 @@ function getSiteDescription(site) {
 
 //     }
 // })()
-
+export { getData, getSites };
