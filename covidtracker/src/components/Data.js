@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Select, Row, Col, Space } from 'antd';
+import { Row, Col, Table, Typography, Divider } from 'antd';
 import { getData } from "../testing";
 
-const { Option } = Select;
+const { Title } = Typography;
 
 const stateArray = [];
 
@@ -59,25 +59,68 @@ stateArray.push("wisconsin");
 stateArray.push("wyoming");
 
 function Testing() {
+  const [stateData, setStateData] = useState([]);
 
-  const [query, setQuery] = useState("");
+  useEffect(() => {
+    async function makeAPIRequest() {
+      const newArray = [];
 
-  function renderStateOptions() {
-    let uiItems = [];
-    stateArray.forEach((element) => {
-      uiItems.push(
-        <Option value={element} key={element}>
-          {element.charAt(0).toUpperCase() + element.slice(1)}
-        </Option>
-      );
-    });
-    return uiItems;
-  }
+      for (const state of stateArray) {
+        const elementData = await getData(state.toLowerCase());
+        elementData.positiveRate = Math.round((elementData.positive / elementData.totalTestResults) * 10000) / 100;
+        elementData.stateName = state.charAt(0).toUpperCase() + state.slice(1);
+        elementData.key = state;
+        newArray.push(elementData);
+      }
+      setStateData(newArray);
+    }
+    makeAPIRequest();
+  }, []);
 
-  function handleSearch() {
-    console.log(query.toLowerCase());
-    console.log(getData(query.toLowerCase()));
-  }
+  const columns = [
+    {
+      title: 'State Name',
+      dataIndex: 'stateName',
+      key: 'stateName',
+    },
+    {
+      title: 'Code',
+      dataIndex: 'state',
+      key: 'state',
+      sorter: {
+        compare: (a, b) => a.state > b.state,
+      },
+    },
+    {
+      title: 'Positive Cases',
+      dataIndex: 'positive',
+      key: 'positive',
+      sorter: {
+        compare: (a, b) => a.positive - b.positive,
+      },
+    },
+    {
+      title: 'Positivity Rate (%)',
+      dataIndex: 'positiveRate',
+      key: 'positiveRate',
+      sorter: {
+        compare: (a, b) => a.positiveRate - b.positiveRate,
+      },
+    },
+    {
+      title: 'Deaths',
+      dataIndex: 'death',
+      key: 'death',
+      sorter: {
+        compare: (a, b) => a.death - b.death,
+      },
+    },
+    {
+      title: 'Last Updated',
+      dataIndex: 'lastUpdateEt',
+      key: 'lastUpdateEt',
+    }
+  ];
   
   return (
     <Row style={{ width: "100%", height: "100%" }}>
@@ -87,26 +130,21 @@ function Testing() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          marginTop: 25,
+          textAlign: "center",
         }}
       >
         <div>
-          <Space direction="vertical">
-            <Select
-              showSearch
-              placeholder="Select a state"
-              optionFilterProp="children"
-              filterOption={(input, option) => 
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-              value={query}
-              onChange={(value) => setQuery(value)}
-              style={{ width: 150, marginTop: 100 }}
-              onSearch={() => handleSearch()}
-              allowClear
-            >
-              {renderStateOptions()}
-            </Select>
-          </Space>
+          <Title>
+            COVID Data by State
+          </Title>
+          <Divider />
+          <Table
+            columns={columns}
+            dataSource={stateData}
+            style={{ marginTop: 25, marginBottom: 100 }}
+            pagination={{ showSizeChanger: true, pageSizeOptions: [10, 20, 50] }}
+          />
         </div>
       </Col>
     </Row>

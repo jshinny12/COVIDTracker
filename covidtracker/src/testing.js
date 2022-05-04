@@ -1,6 +1,3 @@
-import fetch from "node-fetch";
-
-
 const stateSet = new Set();
 
 stateSet.add("alabama");
@@ -200,7 +197,7 @@ async function getStateCode(state) {
         case "idaho":
             return "id";
         case "illinois":
-            return "is";
+            return "il";
         case "indiana":
             return "in";
         case "iowa":
@@ -252,7 +249,7 @@ async function getStateCode(state) {
         case "pennsylvania":
             return "pa";
         case "rhode island":
-            return "ir";
+            return "ri";
         case "south carolina":
             return "sc";
         case "south dakota":
