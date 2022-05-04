@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, Typography, Row, Col } from "antd";
+import { Carousel, Typography } from "antd";
 
 const { Title } = Typography;
 
@@ -7,14 +7,14 @@ function Home() {
 
   const contentStyle = {
     height: '750px',
-    color: '#000',
+    color: '#fff',
     lineHeight: '750px',
     textAlign: 'center',
-    background: '#91d5ff',
+    background: '#1890ff',
   };
 
   return (
-    <Carousel autoplay>
+    <Carousel autoplay pauseOnHover={false}>
       <div>
         <Title style={contentStyle}>
           Welcome to COVIDTracker
