@@ -144,6 +144,7 @@ function Testing() {
             dataSource={stateData}
             style={{ marginTop: 25, marginBottom: 100 }}
             pagination={{ showSizeChanger: true, pageSizeOptions: [10, 20, 50] }}
+            loading={stateData.length === 0}
           />
         </div>
       </Col>

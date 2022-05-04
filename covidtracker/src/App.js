@@ -8,12 +8,15 @@ import About from "./components/About";
 import "antd/dist/antd.min.css";
 import "./App.css";
 import NavBar from "./components/NavBar";
+import { Affix } from "antd";
 
 function App() {
   return (
     <div style={{ minWidth: "650px" }}>
       <BrowserRouter>
-        <NavBar />
+        <Affix>
+          <NavBar />
+        </Affix>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/testing" element={<Testing />} />

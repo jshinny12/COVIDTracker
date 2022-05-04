@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Space, Input, Row, Col, Tooltip } from "antd";
+import { getSites } from "../testing";
 
 const { Search } = Input;
 
@@ -7,6 +8,7 @@ function Testing() {
 
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("");
+  const [sites, setSites] = useState([]);
 
   function onChange(e) {
     const { value } = e.target;
@@ -22,7 +24,10 @@ function Testing() {
   };
 
   async function onSearch() {
-    console.log("HI");
+    console.log(query);
+    const newSites = await getSites(query);
+    setSites(newSites);
+    console.log(newSites);
   }
 
   return (

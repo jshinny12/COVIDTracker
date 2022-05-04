@@ -324,35 +324,6 @@ async function getSites(zip) {
 
 }
 
-function getSiteAddress(site) {
-    return site.address_1;
-}
-
-function getPositiveCases(stateData) {
-    return stateData.positive;
-}
-
-function getPositivityRate(stateData) {
-    return stateData.positive / stateData.totalTestResults;
-}
-
-function getDeaths(stateData) {
-    return stateData.death;
-}
-
-function getSiteName(site) {
-    return site.id;
-}
-
-function getSiteDescription(site) {
-    return site.location_id;
-}
-
-(async () => {
-    const data = await getData("california");
-    console.log(getPositiveCases(data));
-})()
-
 // (async () => {
 //     var array = await getSites('19104');
 //     if (array.length===0) {
