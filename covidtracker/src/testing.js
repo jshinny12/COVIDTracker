@@ -307,10 +307,14 @@ async function getSites(zip) {
     const arr = [];
     var i = 0;
 
+    const zips = [(parseInt(zip) - 1).toString(), zip, (parseInt(zip) + 1).toString()];
+
     data.forEach(test => {
 
         test.physical_address.forEach(addy => {
-            if (addy.postal_code.substring(0, 5) === zip) {
+            if (addy.postal_code.substring(0, 5) === zips[0] ||
+                addy.postal_code.substring(0, 5) === zips[1] ||
+                addy.postal_code.substring(0, 5) === zips[2]) {
                 addy.id = test.name;
                 addy.location_id = test.description;
                 arr[i] = addy;

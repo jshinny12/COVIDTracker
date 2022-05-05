@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Space, Input, Row, Col, Tooltip } from "antd";
+import { Space, Input, Row, Col, Tooltip, Descriptions, Divider } from "antd";
 import { getSites } from "../testing";
 
 const { Search } = Input;
@@ -30,6 +30,25 @@ function Testing() {
     console.log(newSites);
   }
 
+  function renderSites() {
+    if (sites.length !== 0) {
+      const newArray = [];
+      sites.forEach((element) => {
+        newArray.push(
+          <div>
+            <Divider />
+            <Descriptions title={element.id}>
+              <Descriptions.Item label="Addess">{element.address_1}<br />{element.city}, {element.state_province}<br />{element.postal_code}</Descriptions.Item>
+              <Descriptions.Item label="Description">{element.location_id}</Descriptions.Item>
+            </Descriptions>
+          </div>
+        );
+      });
+      return newArray;
+    }
+    return null;
+  }
+
   return (
     <Row style={{ width: "100%", height: "100%" }}>
       <Col
@@ -38,6 +57,8 @@ function Testing() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          paddingLeft: 50,
+          paddingRight: 50,
         }}
       >
         <div>
@@ -55,12 +76,13 @@ function Testing() {
                 enterButton
                 size="large"
                 onSearch={onSearch}
-                style={{ marginTop: 100 }}
+                style={{ marginTop: 100, width: "100%" }}
                 onChange={onChange}
                 maxLength={5}
                 value={query}
               />
             </Tooltip>
+            {renderSites()}
           </Space>
         </div>
       </Col>
